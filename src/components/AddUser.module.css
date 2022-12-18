@@ -90,6 +90,7 @@
 
   .entries label {
     font-size: 1.2em;
+    margin-top: 10px;
   }
 
   .entries input {
@@ -107,7 +108,7 @@
   }
 
   .button {
-    margin-top: 15px;
+    margin-top: 25px;
     text-transform: uppercase;
     padding: 7px;
     width: 100%;
