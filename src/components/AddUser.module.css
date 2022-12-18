@@ -71,7 +71,7 @@
 
 @media screen and (max-width: 800px) {
   .formwrapper {
-    width: 60%;
+    width: 100%;
     padding: 10px;
     min-height: 65vh;
   }
@@ -127,7 +127,7 @@
 
 @media screen and (max-width: 600px) {
   .formwrapper {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     min-height: 65vh;
   }
