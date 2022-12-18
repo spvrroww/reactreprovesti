@@ -103,7 +103,7 @@
 
   .entries input[type='text'],
   .entries input[type='email'] {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
 
   .button {
@@ -145,7 +145,7 @@
   }
 
   .entries label {
-    font-size: 0.85em;
+    font-size: 0.9em;
   }
 
   .entries input {
@@ -159,7 +159,7 @@
 
   .entries input[type='text'],
   .entries input[type='email'] {
-    font-size: 0.6em;
+    font-size: 0.8em;
   }
 
   .button {
