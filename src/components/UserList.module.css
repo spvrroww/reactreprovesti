@@ -2,7 +2,6 @@
   padding: 20px;
   width: 50%;
   margin: auto;
-  /* background-color: #86a868; */
 }
 
 .display-users h2 {
@@ -45,4 +44,40 @@
 .display-users .table .button:hover {
   background-color: #141810;
   color: #fff;
+}
+
+/* Media Queries for Mobile View */
+
+@media screen and (max-width: 800px) {
+  .display-users {
+    padding: 5px;
+    width: 50%;
+    margin: auto;
+  }
+
+  .display-users h2 {
+    color: #6c6d6a;
+    font-size: 1.2em;
+  }
+
+  .display-users .table {
+    width: 100%;
+    color: #6c6d6a;
+  }
+
+  .display-users .table thead tr th,
+  .display-users .table tbody tr td {
+    border-bottom: 1px solid #6c6d6a;
+    padding: 10px 0 10px 0;
+    word-break: break-all;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .display-users .table thead tr th,
+  .display-users .table tbody tr td {
+    border-bottom: 1px solid #6c6d6a;
+    padding: 10px 0 10px 0;
+    word-break: break-all;
+  }
 }
