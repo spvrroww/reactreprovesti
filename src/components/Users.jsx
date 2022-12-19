@@ -1,48 +1,82 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import AddUser from './AddUser';
-import UserList from './UserList';
 import classes from './Users.module.css'
 
+const usersReducer = (state, action) => {
+  switch (action.type) {
+    case 'add':
+      return [
+        ...state,
+        {
+          firstName: '',
+          lastName: '',
+          email: ''
+        }
+      ]
+    case 'delete':
+      state.splice(action.payload, 1);
+      return [...state]
+    case 'update':
+      state[action.payload.index] = {
+        ...state[action.payload.index],
+        [action.payload.key]: action.payload.value
+      }
+      return [...state]
+    default:
+      throw new Error();
+  }
+}
 const Users = () => {
 
 
-  const [users, setUsers] = useState([]);
+  const [users, dispatch] = useReducer(usersReducer, [{ firstName: '', lastName: '', email: '' }]);
 
-  const addUserHandler = (firstName, lastName, email) => {
+  const addUserHandler = (index, email) => {
 
     try {
-      const emailExist = users.findIndex(user => user.email.toLowerCase() === email.toLowerCase())
-      if (emailExist !== -1) {
+      const foundIndex = users.findIndex(user => user.email.toLowerCase() === email.toLowerCase())
+      if (foundIndex !== -1 && foundIndex !== index) {
         throw new Error('User with that email already exists')
       }
 
-      setUsers(currentUsers => {
-        const clonedUsers = [...currentUsers]
-
-        clonedUsers.push({
-          firstName,
-          lastName,
-          email
-        })
-
-        return clonedUsers
-      })
+      dispatch({ type: 'add' })
     } catch (error) {
       alert(error.message)
     }
 
   }
 
-  const deleteUserHandler = (email) => {
-    setUsers(currentUsers => {
-      return currentUsers.filter(user => user.email.toLowerCase() !== email.toLowerCase())
+  const updateUserHandler = (index, key, value) => {
+    dispatch({
+      type: 'update',
+      payload: {
+        index,
+        key,
+        value
+      }
     })
+  }
+
+  const deleteUserHandler = (index) => {
+    dispatch({ type: 'delete', payload: index })
   }
 
   return (
     <div className={classes.container}>
-      <AddUser onAddUser={addUserHandler} />
-      <UserList users={users} onDeleteUser={deleteUserHandler} />
+      {
+        users.map((user, index) => {
+          return <AddUser
+            onAddUser={addUserHandler}
+            onUpdateUser={updateUserHandler}
+            onDeleteUser={deleteUserHandler}
+            index={index}
+            key={index}
+            user={user}
+            isLast={index === users.length - 1}
+            totalUsers={users.length}
+          />
+        })
+      }
     </div>
   );
 };

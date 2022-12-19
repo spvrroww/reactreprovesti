@@ -5,25 +5,18 @@ import classes from './AddUser.module.css'
 
 const AddUser = (props) => {
 
-    const { onAddUser } = props
-
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
+    const { onAddUser, onDeleteUser, onUpdateUser, index, user, isLast, totalUsers } = props
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         try {
-            if (!validEmail(email)) {
+            if (!validEmail(user.email)) {
                 throw new Error('Please provide a valid email address')
             }
 
-            onAddUser(firstName, lastName, email)
+            onAddUser(index, user.email)
 
-            setFirstName('')
-            setLastName('')
-            setEmail('')
         } catch (error) {
             alert(error.message)
         }
@@ -39,41 +32,46 @@ const AddUser = (props) => {
             <h2>Users Log Page</h2>
             <form onSubmit={handleSubmit}>
                 <div className={classes.entries}>
-                    <label htmlFor="text">First name</label>
+                    <label htmlFor="firstName">First name</label>
                     <input
                         type="text"
                         name="firstName"
                         placeholder="Enter your first name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        value={user.firstName}
+                        onChange={(e) => onUpdateUser(index, 'firstName', e.target.value)}
                         required
                     />
                 </div>
                 <div className={classes.entries}>
-                    <label htmlFor="text">Last name</label>
+                    <label htmlFor="lastName">Last name</label>
                     <input
                         type="text"
                         name="lastName"
                         placeholder="Enter your last name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
+                        value={user.lastName}
+                        onChange={(e) => onUpdateUser(index, 'lastName', e.target.value)}
                         required
                     />
                 </div>
                 <div className={classes.entries}>
                     <label htmlFor="email">Email</label>
                     <input
+                        name='email'
                         type="email"
-                        className="email"
                         placeholder="abc@wevesti.com"
-                        value={email}
-                        onChange={(e) => {
-                            setEmail(e.target.value);
-                        }}
+                        value={user.email}
+                        onChange={(e) => onUpdateUser(index, 'email', e.target.value)}
                         required
                     />
                 </div>
-                <button type='submit' className={classes.button}>Submit</button>
+
+                {
+                    isLast && (<button type='submit' className={classes.button}> Add user </button>)
+                }
+
+                {
+                    totalUsers > 1 && (<button type='button' className={classes.button} onClick={onDeleteUser.bind(null, index)}> Delete </button>)
+                }
             </form>
         </div>
     )
