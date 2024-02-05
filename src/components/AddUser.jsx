@@ -23,9 +23,11 @@ const AddUser = (props) => {
 
 
     };
-
+    const myvar = process.env.REACT_APP_TESTVAR
     return (
+        
         <div className={classes.formwrapper}>
+            <h1>{myvar}</h1>
             <div className={classes['img-wrap']}>
                 <img src={vesti} alt="vesti-logo" />
             </div>

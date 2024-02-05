@@ -61,8 +61,10 @@ const Users = () => {
     dispatch({ type: 'delete', payload: index })
   }
 
+  const myvar = process.env.REACT_APP_TESTVAR
   return (
     <div className={classes.container}>
+      <h1>{myvar}</h1>
       {
         users.map((user, index) => {
           return <AddUser
